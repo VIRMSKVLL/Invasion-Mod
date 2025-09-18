@@ -36,5 +36,6 @@ By checking out the other forks of this project, you can find various (unrelease
 - 1.10.2 by [XenoDarth](https://github.com/XenoDarth/invasion1.2.0a-mc1.10.2) and (more recent) [crazysnailboy](https://github.com/crazysnailboy/Invasion)
 - 1.12.2 by [DerToaster98](https://github.com/DerToaster98/Invasion) and (far more recent) [durinfab](https://github.com/durinfab/Invasion) (I've successfully compiled the latest version, but major bugs and crashes appear. Not recommended for ingame use.)
 - 1.15.2 by [DolphinTechCodes](https://github.com/DolphinTechCodes/Invasion)
+- 1.21.1 by [Sollace](https://github.com/Sollace/Invasion-Mod)
 
 **If you have the knowledge and the time, I'm sure many people would be happy to see this mod usable in 1.12.2 or even later versions!**
