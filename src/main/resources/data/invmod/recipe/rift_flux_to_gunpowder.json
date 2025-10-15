@@ -4,12 +4,10 @@
   "ingredients": [
     { "item": "invmod:rift_flux" },
     { "item": "invmod:rift_flux" },
-    { "item": "invmod:rift_flux" },
-    { "item": "invmod:rift_flux" },
-    { "item": "invmod:rift_flux" },
-    { "item": "minecraft:bow" }
+    { "item": "invmod:rift_flux" }
   ],
   "result": {
-    "item": "invmod:searing_bow"
+    "id": "minecraft:gunpowder",
+    "count": 16
   }
 }

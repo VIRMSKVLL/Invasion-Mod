@@ -8,6 +8,6 @@
     { "item": "minecraft:bone" }
   ],
   "result": {
-    "item": "invmod:stable_catalyst_mixture"
+    "id": "invmod:stable_catalyst_mixture"
   }
 }

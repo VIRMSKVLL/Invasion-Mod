@@ -3,6 +3,7 @@ package com.invasion.entity.pathfinding;
 import java.util.List;
 import java.util.Set;
 
+import com.invasion.InvasionMod;
 import org.jetbrains.annotations.Nullable;
 
 import com.invasion.block.BlockMetadata;

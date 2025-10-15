@@ -24,7 +24,7 @@ public class DazeParticle extends SpriteBillboardParticle {
         this.velocityX = 0;
         this.velocityY = 0;
         this.velocityZ = 0;
-        maxAge = 10;
+        maxAge = 100;
         gravityStrength = 0;
         setSpriteForAge(spriteProvider);
     }

@@ -6,7 +6,7 @@
       { "item": "minecraft:lapis_lazuli" },
       { "item": "minecraft:blue_dye" }
     ],
-    "#": { "item": "minecraft:redstone_dust" },
+    "#": { "item": "minecraft:redstone" },
     "D": { "item": "minecraft:diamond" }
   },
   "pattern": [
@@ -15,6 +15,6 @@
     " X "
   ],
   "result": {
-    "item": "invmod:phase_crystal"
+    "id": "invmod:phase_crystal"
   }
 }

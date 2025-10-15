@@ -7,6 +7,6 @@
     { "item": "invmod:phase_crystal" }
   ],
   "result": {
-    "item": "invmod:material_probe"
+    "id": "invmod:material_probe"
   }
 }

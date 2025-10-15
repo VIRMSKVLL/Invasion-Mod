@@ -3,11 +3,10 @@
   "category": "misc",
   "ingredients": [
     { "item": "invmod:rift_flux" },
-    { "item": "invmod:rift_flux" },
-    { "item": "invmod:rift_flux" }
+    { "item": "minecraft:lapis_lazuli" },
+    { "item": "minecraft:lapis_lazuli" }
   ],
   "result": {
-    "item": "minecraft:gunpowder",
-    "count": 16
+    "id": "invmod:damping_agent"
   }
 }

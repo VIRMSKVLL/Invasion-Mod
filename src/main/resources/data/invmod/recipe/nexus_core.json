@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "X": { "item": "invmod:phase_crystal" },
-    "#": { "item": "minecraft:redstone_dust" },
+    "#": { "item": "minecraft:redstone" },
     "D": { "item": "minecraft:obsidian" }
   },
   "pattern": [
@@ -12,6 +12,6 @@
     " # "
   ],
   "result": {
-    "item": "invmod:nexus_core"
+    "id": "invmod:nexus_core"
   }
 }

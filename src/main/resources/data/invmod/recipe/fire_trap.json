@@ -6,6 +6,6 @@
     { "item": "minecraft:lava_bucket" }
   ],
   "result": {
-    "item": "invmod:fire_trap"
+    "id": "invmod:fire_trap"
   }
 }

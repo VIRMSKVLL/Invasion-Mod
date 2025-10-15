@@ -8,6 +8,6 @@
     { "item": "invmod:diamond_sword" }
   ],
   "result": {
-    "item": "invmod:rift_flux"
+    "id": "invmod:rift_flux"
   }
 }

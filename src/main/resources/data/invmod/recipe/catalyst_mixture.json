@@ -3,11 +3,11 @@
   "category": "misc",
   "ingredients": [
     { "item": "minecraft:bowl" },
-    { "item": "minecraft:redstone_dust" },
+    { "item": "minecraft:redstone" },
     { "item": "minecraft:bone" },
     { "item": "minecraft:rotten_flesh" }
   ],
   "result": {
-    "item": "invmod:catalyst_mixture"
+    "id": "invmod:catalyst_mixture"
   }
 }

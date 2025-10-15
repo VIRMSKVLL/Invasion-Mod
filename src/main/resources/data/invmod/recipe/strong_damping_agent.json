@@ -7,6 +7,6 @@
     { "item": "invmod:damping_agent" }
   ],
   "result": {
-    "item": "invmod:strong_damping_agent"
+    "id": "invmod:strong_damping_agent"
   }
 }
