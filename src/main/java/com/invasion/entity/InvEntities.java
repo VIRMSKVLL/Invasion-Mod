@@ -39,10 +39,10 @@ public interface InvEntities {
             .dimensions(1.8F, 1.95F).eyeHeight(1.74F).vehicleAttachment(-0.7F).maxTrackingRange(8));
     EntityType<BurrowerEntity> BURROWER = register("burrower", EntityType.Builder.<BurrowerEntity>create(BurrowerEntity::new, SpawnGroup.MONSTER)
             .dimensions(0.6F, 1.99F).eyeHeight(1.74F).vehicleAttachment(-0.7F).maxTrackingRange(8));
-    EntityType<ImpEnitty> IMP = register("imp", EntityType.Builder.<ImpEnitty>create(ImpEnitty::new, SpawnGroup.MONSTER)
-            .dimensions(0.6F, 1.99F).eyeHeight(1.74F).vehicleAttachment(-0.7F).maxTrackingRange(8));
+    EntityType<ImpEntity> IMP = register("imp", EntityType.Builder.<ImpEntity>create(ImpEntity::new, SpawnGroup.MONSTER)
+            .dimensions(0.8F, 0.9F).eyeHeight(0.9F).vehicleAttachment(-0.7F).maxTrackingRange(8));
     EntityType<IMWolfEntity> WOLF = register("wolf", EntityType.Builder.<IMWolfEntity>create(IMWolfEntity::new, SpawnGroup.CREATURE)
-            .dimensions(0.6F, 0.85F).eyeHeight(0.68F).passengerAttachments(new Vec3d(0.0, 0.81875, -0.0625)).maxTrackingRange(10));
+            .dimensions(0.6F, 0.85F).eyeHeight(0.85F).passengerAttachments(new Vec3d(0.0, 0.81875, -0.0625)).maxTrackingRange(10));
 
     EntityType<SpiderEggEntity> SPIDER_EGG = register("spider_egg", EntityType.Builder.<SpiderEggEntity>create(SpiderEggEntity::new, SpawnGroup.MISC)
             .dimensions(0.5F, 0.8F).eyeHeight(0.5F).maxTrackingRange(10));
@@ -87,7 +87,7 @@ public interface InvEntities {
         FabricDefaultAttributeRegistry.register(QUEEN_SPIDER, QueenSpiderEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(THROWER, ThrowerEntity.createT1V0Attributes());
         FabricDefaultAttributeRegistry.register(BURROWER, BurrowerEntity.createAttributes());
-        FabricDefaultAttributeRegistry.register(IMP, ImpEnitty.createAttributes());
+        FabricDefaultAttributeRegistry.register(IMP, ImpEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(WOLF, IMWolfEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(SPIDER_EGG, SpiderEggEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(SPAWN_PROXY, MobEntity.createMobAttributes());

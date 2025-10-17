@@ -19,7 +19,7 @@ import net.minecraft.world.World;
 
 public class TerrainBuilder implements ITerrainBuild {
     private static final float LADDER_COST = 25;
-    private static final float PLANKS_COST = 45;
+    private static final float PLANKS_COST = 1;
     private static final float COBBLE_COST = 65;
 
     private final NexusEntity mob;
@@ -56,7 +56,7 @@ public class TerrainBuilder implements ITerrainBuild {
 
         if (height == 1) {
             if (!block.isFullCube(world, mutable)) {
-                builder.add(new ModifyBlockEntry(mutable.toImmutable(), Blocks.OAK_PLANKS.getDefaultState(), (int) (PLANKS_COST / buildRate)));
+                builder.add(new ModifyBlockEntry(mutable.toImmutable(), Blocks.WARPED_PLANKS.getDefaultState(), (int) (PLANKS_COST / buildRate)));
             }
             if (world.isAir(mutable.set(pos).move(Direction.DOWN))) {
                 builder.add(new ModifyBlockEntry(mutable.toImmutable(), Blocks.LADDER.getDefaultState(), (int) (LADDER_COST / buildRate)));
@@ -64,7 +64,7 @@ public class TerrainBuilder implements ITerrainBuild {
         }
 
         if (!world.getBlockState(mutable.set(pos).move(offset)).isFullCube(world, mutable)) {
-            builder.add(new ModifyBlockEntry(mutable.toImmutable(), Blocks.OAK_PLANKS.getDefaultState(), (int) (PLANKS_COST / buildRate)));
+            builder.add(new ModifyBlockEntry(mutable.toImmutable(), Blocks.WARPED_PLANKS.getDefaultState(), (int) (PLANKS_COST / buildRate)));
         }
         if (!world.getBlockState(pos).isOf(Blocks.LADDER)) {
             builder.add(new ModifyBlockEntry(pos, Blocks.LADDER.getDefaultState(), (int) (LADDER_COST / buildRate)));
@@ -73,7 +73,7 @@ public class TerrainBuilder implements ITerrainBuild {
         if (scaffold.isPlatformLayer(height)) {
             for (Vec3i i : PosUtils.OFFSET_RING) {
                 if (!i.equals(offset.getVector()) && !world.getBlockState(mutable.set(pos).move(i)).isFullCube(world, mutable)) {
-                    builder.add(new ModifyBlockEntry(mutable.toImmutable(), Blocks.OAK_PLANKS.getDefaultState(), (int) (PLANKS_COST / buildRate)));
+                    builder.add(new ModifyBlockEntry(mutable.toImmutable(), Blocks.WARPED_PLANKS.getDefaultState(), (int) (PLANKS_COST / buildRate)));
                 }
             }
         }
@@ -89,7 +89,7 @@ public class TerrainBuilder implements ITerrainBuild {
         World world = mob.asEntity().getWorld();
 
         if (!world.getBlockState(mutable.set(pos).move(orientation).move(Direction.DOWN)).isFullCube(world, mutable)) {
-            builder.add(new ModifyBlockEntry(mutable.toImmutable(), Blocks.OAK_PLANKS.getDefaultState(), (int) (PLANKS_COST / buildRate)));
+            builder.add(new ModifyBlockEntry(mutable.toImmutable(), Blocks.CRIMSON_PLANKS.getDefaultState(), (int) (PLANKS_COST / buildRate)));
         }
         if (world.isAir(mutable.move(Direction.DOWN))) {
             builder.add(new ModifyBlockEntry(mutable.toImmutable(), Blocks.LADDER.getDefaultState(), (int) (LADDER_COST / buildRate)));
@@ -97,7 +97,7 @@ public class TerrainBuilder implements ITerrainBuild {
 
         for (int i = 0; i < layersToBuild; i++) {
             if (!world.getBlockState(mutable.set(pos).move(orientation).move(Direction.UP, i)).isFullCube(world, mutable)) {
-                builder.add(new ModifyBlockEntry(mutable.toImmutable(), Blocks.OAK_PLANKS.getDefaultState(), (int) (PLANKS_COST / buildRate)));
+                builder.add(new ModifyBlockEntry(mutable.toImmutable(), Blocks.CRIMSON_PLANKS.getDefaultState(), (int) (PLANKS_COST / buildRate)));
             }
             if (world.getBlockState(mutable.move(Direction.UP, i)).isOf(Blocks.LADDER)) {
                 builder.add(new ModifyBlockEntry(mutable.toImmutable(), Blocks.LADDER.getDefaultState(), (int) (LADDER_COST / buildRate)));
@@ -149,7 +149,7 @@ public class TerrainBuilder implements ITerrainBuild {
             boolean needsSupport = IMLandPathNodeMaker.avoidsBlock(mob.asEntity(), mutable.set(pos).move(Direction.DOWN, 2))
                                 || IMLandPathNodeMaker.avoidsBlock(mob.asEntity(), mutable.set(pos).move(Direction.DOWN, 3));
             builder.add(new ModifyBlockEntry(posBelow,
-                    (needsSupport ? Blocks.COBBLESTONE : Blocks.OAK_PLANKS).getDefaultState(),
+                    (needsSupport ? Blocks.BLACKSTONE : Blocks.WARPED_PLANKS).getDefaultState(),
                     (int) ((needsSupport ? COBBLE_COST : PLANKS_COST) / buildRate))
             );
         }

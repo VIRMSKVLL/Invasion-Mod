@@ -1,5 +1,6 @@
 package com.invasion.entity;
 
+import com.invasion.InvasionMod;
 import com.invasion.entity.ai.goal.AttackNexusGoal;
 import com.invasion.entity.ai.goal.GoToNexusGoal;
 import com.invasion.entity.ai.goal.KillEntityGoal;
@@ -18,12 +19,32 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-public class ImpEnitty extends IMMobEntity {
-    public ImpEnitty(EntityType<ImpEnitty> type, World world) {
+public class ImpEntity extends IMMobEntity {
+    public ImpEntity(EntityType<ImpEntity> type, World world) {
         super(type, world);
         getNavigatorNew().getActor().setCanClimb(true);
+    }
+
+    @Override
+    public void tick() { // TODO: Add custom flame particle with suuuper short life span for the imp tail :D
+        if (!this.getWorld().isClient()) {
+            particleDelay = 0;
+            double distance = 0.45;
+            float yaw = this.getYaw();
+            float yawRadians = (float) Math.toRadians(yaw);
+            // FIXME: rotation doesnt allways follow correctly
+            double offsetX = -MathHelper.sin(yawRadians) * distance;
+            double offsetZ = MathHelper.cos(yawRadians) * distance;
+            ServerWorld serverWorld = (ServerWorld) this.getWorld();
+            serverWorld.spawnParticles(ParticleTypes.SOUL_FIRE_FLAME,this.getX()-offsetX,this.getY()+0.25,this.getZ()-offsetZ,1,0,0,0,0);
+        }
+        InvasionMod.log("TICK");
+        super.tick();
     }
 
     public static DefaultAttributeContainer.Builder createAttributes() {

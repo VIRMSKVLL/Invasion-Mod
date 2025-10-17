@@ -42,6 +42,10 @@ abstract class PathNodeMixin implements ActionablePathNode {
         ((ActionablePathNode)target).setAction(buf.readEnumConstant(PathAction.class));
     }
 
+    /**
+     * @author
+     * @reason to add logging??? duh???? shut up Java
+     */
     @Override
     @Overwrite
     public String toString() {

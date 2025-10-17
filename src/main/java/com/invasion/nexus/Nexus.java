@@ -113,6 +113,9 @@ public class Nexus implements ControllableNexusAccess {
                 case 7 -> powerLevel;
                 case 8 -> nexusItemStacks.getCookTime();
                 case 9 -> isActivating() ? 1 : 0;
+                case 10 -> hp;
+                case 11 -> getTimetoSunset();
+                case 12 -> mobList.size();
                 default -> 0;
             };
         }
@@ -132,7 +135,7 @@ public class Nexus implements ControllableNexusAccess {
             } else if (index == 5) {
                 setSpawnRadius(j);
             } else if (index == 6) {
-                nexusItemStacks.setFlugProgress(j);
+                nexusItemStacks.setFluxProgress(j);
             } else if (index == 7) {
                 powerLevel = j;
             } else if (index == 8) {
@@ -142,7 +145,7 @@ public class Nexus implements ControllableNexusAccess {
 
         @Override
         public int size() {
-            return 9;
+            return 11;
         }
     };
 
@@ -238,6 +241,10 @@ public class Nexus implements ControllableNexusAccess {
     @Override
     public int getCurrentWave() {
         return currentWave;
+    }
+
+    private int getTimetoSunset() {
+        return powerLevel;
     }
 
     public void tick() {
@@ -464,12 +471,12 @@ public class Nexus implements ControllableNexusAccess {
         powerLevelTimer += elapsed;
         if (powerLevelTimer > MAX_POWER_LEVEL) {
             powerLevelTimer -= MAX_POWER_LEVEL;
-            nexusItemStacks.generateFlux(5 + (int) (5 * powerLevel / 1550F));
+            nexusItemStacks.generateFlux((int) (5 * powerLevel / 2500F));
             if (!nexusItemStacks.getStack(0).isOf(InvItems.DAMPING_AGENT)) {
                 powerLevel++;
             }
         }
-
+        // Kill the game
         if (nexusItemStacks.getStack(0).isOf(InvItems.STRONG_DAMPING_AGENT) && powerLevel >= 0 && !continuousAttack && --powerLevel < 0) {
             stop(false);
         }
@@ -525,7 +532,7 @@ public class Nexus implements ControllableNexusAccess {
             }
 
             zapTimer--;
-            if (mobsLeftInWave <= 0) {
+            if (mobsLeftInWave >= 0) {
                 if (zapTimer <= 0 && zapEnemy(true)) {
                     zapEnemy(false);
                     zapTimer = 23;
@@ -563,7 +570,7 @@ public class Nexus implements ControllableNexusAccess {
                     start(1);
                 } else if (catalyst.isOf(InvItems.STRONG_NEXUS_CATALYST)) {
                     catalyst.decrement(1);
-                    start(10);
+                    start(64);
                 } else if (catalyst.isOf(InvItems.STABLE_NEXUS_CATALYST)) {
                     catalyst.decrement(1);
                     activated = true;
@@ -656,7 +663,7 @@ public class Nexus implements ControllableNexusAccess {
             return false;
         }
         mob.asEntity().damage(mob.asEntity().getDamageSources().magic(), 500);
-        getWorld().spawnEntity(new ElectricityBoltEntity(getWorld(), pos.toCenterPos(), mob.asEntity().getEyePos(), 15, sfx));
+        getWorld().spawnEntity(new ElectricityBoltEntity(getWorld(), pos.toCenterPos(), mob.asEntity().getEyePos(), 25, sfx));
         return true;
     }
 

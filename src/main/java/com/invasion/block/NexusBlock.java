@@ -94,6 +94,7 @@ public class NexusBlock extends BlockWithEntity {
             }
 
             world.addParticle(ParticleTypes.PORTAL, x1, y1, z1, x2, y2, z2);
+            world.addParticle(ParticleTypes.REVERSE_PORTAL, x1*0.8, y1*0.8, z1*0.8, x2*0.8, y2*0.8, z2*0.8);
         }
     }
 

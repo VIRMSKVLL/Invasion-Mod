@@ -33,8 +33,8 @@ import net.minecraft.world.BlockView;
 import net.minecraft.world.CollisionView;
 
 public class BuilderIMMobNavigation extends IMMobNavigation {
-    private static final int MAX_LADDER_TOWER_HEIGHT = 4;
-    private static final int MAX_LADDERABLE_WALL_HEIGHT = 16;
+    private static final int MAX_LADDER_TOWER_HEIGHT = 32;
+    private static final int MAX_LADDERABLE_WALL_HEIGHT = 64;
     private static final int WORK_FOUND_COOLDOWN = 60;
     private static final int JOBLESS_COOLDOWN = 140;
 
@@ -289,7 +289,7 @@ public class BuilderIMMobNavigation extends IMMobNavigation {
         private PathNode getBridgeNode(int x, int y, int z) {
             PathNode node = getNode(x, y, z);
             node.type = PathNodeType.WALKABLE;
-            node.penalty = 1.5F;
+            node.penalty = 0F;
             return ActionablePathNode.setAction(node, PathAction.BRIDGE);
         }
 

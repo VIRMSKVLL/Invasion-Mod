@@ -8,8 +8,8 @@ public class OutputSlot extends Slot {
     public OutputSlot(Inventory iinventory, int i, int j, int k) {
         super(iinventory, i, j, k);
     }
-
-    public boolean isItemValid(ItemStack itemstack) {
+    @Override
+    public boolean canInsert(ItemStack stack) {
         return false;
     }
 }

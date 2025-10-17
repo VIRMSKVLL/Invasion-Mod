@@ -1,5 +1,6 @@
 package com.invasion.item;
 
+import net.minecraft.entity.mob.MobEntity;
 import org.jetbrains.annotations.Nullable;
 
 import com.invasion.entity.IMWolfEntity;
@@ -24,25 +25,26 @@ class StrangeBoneItem extends Item {
 
     @Override
     public ActionResult useOnEntity(ItemStack stack, PlayerEntity user, LivingEntity entity, Hand hand) {
-        if (entity.getWorld().isClient || !(entity instanceof WolfEntity wolf && wolf.isTamed()) || entity instanceof IMWolfEntity) {
-            return ActionResult.PASS;
-        }
-
-        @Nullable
-        NexusAccess nexus = IHasNexus.findNexus(entity.getWorld(), entity.getBlockPos());
-
-        if (nexus == null) {
-            user.sendMessage(Text.translatable("invmod.message.bone.nonearbynexus1").formatted(Formatting.RED));
-            user.sendMessage(Text.translatable("invmod.message.bone.nonearbynexus2").formatted(Formatting.RED));
-            return ActionResult.FAIL;
-        }
-
-        IMWolfEntity newWolf = wolf.convertTo(InvEntities.WOLF, true);
-        newWolf.setNexus(nexus);
-
-        wolf.getWorld().spawnEntity(newWolf);
-        wolf.discard();
-        stack.decrement(1);
-        return ActionResult.SUCCESS;
+        return ActionResult.PASS;
+//        if (entity.getWorld().isClient || !(entity instanceof WolfEntity wolf && wolf.isTamed()) || entity instanceof IMWolfEntity) {
+//            return ActionResult.PASS;
+//        }
+//
+//        @Nullable
+//        NexusAccess nexus = IHasNexus.findNexus(entity.getWorld(), entity.getBlockPos());
+//
+//        if (nexus == null) {
+//            user.sendMessage(Text.translatable("invmod.message.bone.nonearbynexus1").formatted(Formatting.RED));
+//            user.sendMessage(Text.translatable("invmod.message.bone.nonearbynexus2").formatted(Formatting.RED));
+//            return ActionResult.FAIL;
+//        }
+//
+//        IMWolfEntity newWolf = wolf.set(InvEntities.WOLF, true);
+//        newWolf.setNexus(nexus);
+//
+//        wolf.getWorld().spawnEntity(newWolf);
+//        wolf.discard();
+//        stack.decrement(1);
+//        return ActionResult.SUCCESS;
     }
 }

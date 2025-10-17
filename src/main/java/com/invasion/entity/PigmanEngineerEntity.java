@@ -1,5 +1,6 @@
 package com.invasion.entity;
 
+import com.invasion.InvasionMod;
 import com.invasion.Notifiable;
 import com.invasion.entity.ai.builder.TerrainBuilder;
 import com.invasion.entity.ai.builder.TerrainModifier;
@@ -39,7 +40,7 @@ import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.World;
 
 public class PigmanEngineerEntity extends IMMobEntity implements Miner {
-    private final TerrainModifier terrainModifier = new TerrainModifier(this, 2.8F);
+    private final TerrainModifier terrainModifier = new TerrainModifier(this, 4.8F);
     private final TerrainBuilder terrainBuilder = new TerrainBuilder(this, 1);
 
     private float supportThisTick;

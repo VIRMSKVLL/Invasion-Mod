@@ -9,7 +9,6 @@ public interface InvTags {
 
     interface Entities {
         TagKey<EntityType<?>> QUEEN_SPIDER_OFFSPRING = entity("queen_spider_offspring");
-
         private static TagKey<EntityType<?>> entity(String name) {
             return TagKey.of(RegistryKeys.ENTITY_TYPE, InvasionMod.id(name));
         }

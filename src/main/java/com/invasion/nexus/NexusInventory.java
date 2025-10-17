@@ -10,7 +10,7 @@ import net.minecraft.registry.RegistryWrapper;
 
 public class NexusInventory extends SimpleInventory {
     static final int MAX_FLUX_GENERATION_TIME = 3000;
-    static final int MAX_TRAP_COOK_TIME = 1200;
+    static final int MAX_TRAP_COOK_TIME = 1; //1200
 
     private int cookTime;
     private int accumulatedFlux;
@@ -23,7 +23,7 @@ public class NexusInventory extends SimpleInventory {
         return accumulatedFlux;
     }
 
-    public void setFlugProgress(int time) {
+    public void setFluxProgress(int time) {
         accumulatedFlux = time;
     }
 
@@ -43,11 +43,11 @@ public class NexusInventory extends SimpleInventory {
         accumulatedFlux += increment;
         if (accumulatedFlux >= MAX_FLUX_GENERATION_TIME) {
             ItemStack currentGeneratedItem = getStack(1);
-            if (currentGeneratedItem.isEmpty()) {
+            if (currentGeneratedItem.isEmpty()) { // FIXME: Stack only applies increment multiplier if existing flux is in the slot
                 setStack(1, InvItems.RIFT_FLUX.getDefaultStack());
                 accumulatedFlux -= MAX_FLUX_GENERATION_TIME;
             } else if (currentGeneratedItem.isOf(InvItems.RIFT_FLUX)) {
-                currentGeneratedItem.increment(1);
+                currentGeneratedItem.increment(increment);
                 accumulatedFlux -= MAX_FLUX_GENERATION_TIME;
             }
         }
@@ -69,7 +69,7 @@ public class NexusInventory extends SimpleInventory {
                         cookTime = 0;
                     }
                 }
-            } else if (firstStack.isOf(InvItems.RIFT_FLUX)) {
+            } else if (firstStack.isOf(InvItems.RIFT_FLUX)) { // TODO: Maybe change this system?
                 if (cookTime < MAX_TRAP_COOK_TIME && nexus.getLevel() >= 10) {
                     cookTime += 5;
                 }

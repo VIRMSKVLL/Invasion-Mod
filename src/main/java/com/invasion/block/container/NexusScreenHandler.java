@@ -22,7 +22,7 @@ public class NexusScreenHandler extends ScreenHandler {
     private final ScreenHandlerContext context;
 
     public NexusScreenHandler(int syncId, PlayerInventory inventory) {
-        this(syncId, inventory, new SimpleInventory(2), new ArrayPropertyDelegate(10), ScreenHandlerContext.EMPTY);
+        this(syncId, inventory, new SimpleInventory(2), new ArrayPropertyDelegate(13), ScreenHandlerContext.EMPTY);
     }
 
     public NexusScreenHandler(int syncId, PlayerInventory playerInventory, Inventory nexusInventory, PropertyDelegate properties, ScreenHandlerContext context) {
@@ -30,8 +30,8 @@ public class NexusScreenHandler extends ScreenHandler {
         this.context = context;
         this.properties = properties;
         addProperties(properties);
-        addSlot(new Slot(nexusInventory, 0, 32, 33));
-        addSlot(new OutputSlot(nexusInventory, 1, 102, 33));
+        addSlot(new Slot(nexusInventory, 0, 136, 29));
+        addSlot(new OutputSlot(nexusInventory, 1, 12, 29));
 
         // inventory
         for (int row = 0; row < 3; row++) {
@@ -66,6 +66,8 @@ public class NexusScreenHandler extends ScreenHandler {
         return properties.get(4);
     }
 
+    public int getRemainingMobs() { return properties.get(12); }
+
     public int getSpawnRadius() {
         return properties.get(5);
     }
@@ -83,11 +85,19 @@ public class NexusScreenHandler extends ScreenHandler {
     }
 
     public boolean isActivating() {
-        return properties.get(9) != 0;
+        return getActivationTimer() != 0;
     }
 
     public int getActivationProgressScaled(int i) {
         return getActivationTimer() * i / 400;
+    }
+
+    public int getNexusHealthScaled(int i) {
+        return properties.get(10) * i / 100;
+    }
+
+    public int getNextRaidTime() {
+        return properties.get(10);
     }
 
     public int getGenerationProgressScaled(int i) {
@@ -96,7 +106,7 @@ public class NexusScreenHandler extends ScreenHandler {
 
     public int getCookProgressScaled(int i) {
         return getCookTime() * i / 1200;
-    }
+    } // removed as I say DEATH TO TRAPS
 
     @Override
     public boolean canUse(PlayerEntity entityplayer) {

@@ -44,6 +44,10 @@ public class Combatants implements Iterable<Combatant<?>> {
         return mobList.removeLast();
     }
 
+    public int size() {
+        return mobList.size();
+    }
+
     @Override
     public Iterator<Combatant<?>> iterator() {
         return mobList.iterator();
