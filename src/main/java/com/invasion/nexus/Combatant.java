@@ -26,7 +26,7 @@ public interface Combatant<T extends LivingEntity> extends IHasNexus {
 
     @Override
     default double findDistanceToNexus() {
-        if (!hasNexus()) {
+        if (!hasNexus() || asEntity() == null) {
             return Double.MAX_VALUE;
         }
         return Math.sqrt(asEntity().squaredDistanceTo(getNexus().getOrigin().toCenterPos()));

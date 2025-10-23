@@ -2,15 +2,14 @@ package com.invasion.entity;
 
 import java.util.List;
 
+import com.invasion.entity.ai.goal.*;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.mob.PathAwareEntity;
 import org.jetbrains.annotations.Nullable;
 
 import com.invasion.InvasionMod;
 import com.invasion.entity.ai.IMSpiderMoveControl;
-import com.invasion.entity.ai.goal.AttackNexusGoal;
-import com.invasion.entity.ai.goal.GoToNexusGoal;
-import com.invasion.entity.ai.goal.MobMeleeAttackGoal;
-import com.invasion.entity.ai.goal.RallyBehindLeaderGoal;
-import com.invasion.entity.ai.goal.ProvideSupportGoal;
 import com.invasion.entity.ai.goal.target.CustomRangeActiveTargetGoal;
 import com.invasion.entity.ai.goal.target.RetaliateGoal;
 import com.invasion.entity.pathfinding.IMMobNavigation;
@@ -20,11 +19,6 @@ import com.invasion.particle.InvParticles;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnReason;
-import net.minecraft.entity.ai.goal.LookAroundGoal;
-import net.minecraft.entity.ai.goal.LookAtEntityGoal;
-import net.minecraft.entity.ai.goal.RevengeGoal;
-import net.minecraft.entity.ai.goal.SwimGoal;
-import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
 import net.minecraft.entity.ai.pathing.EntityNavigation;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttribute;
@@ -33,7 +27,6 @@ import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.mob.SpiderEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.PassiveEntity.PassiveData;
@@ -47,7 +40,7 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 
 public class NexusSpiderEntity extends SpiderEntity implements NexusEntity, MountableEntity, Stunnable {
-    private static final EntityAttributeModifier BABY_SPEED_BONUS = AttributeUtil.addPercentage(InvasionMod.id("baby_speed"), 50);
+    private static final EntityAttributeModifier BABY_SPEED_BONUS = AttributeUtil.addPercentage(InvasionMod.id("baby_speed"), 25);
     private static final EntityAttributeModifier BABY_ATTACK_BONUS = AttributeUtil.multiplyTotal(InvasionMod.id("baby_attack"), 0.1F);
 
     private static final List<RegistryEntry<EntityAttribute>> GROWTH_SCALING_ATTRIBUTES = List.of(
@@ -74,7 +67,7 @@ public class NexusSpiderEntity extends SpiderEntity implements NexusEntity, Moun
 
     public static DefaultAttributeContainer.Builder createAttributes() {
         return SpiderEntity.createSpiderAttributes()
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.29F)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.019F)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 3)
                 .add(EntityAttributes.GENERIC_GRAVITY, 0.08);
     }
@@ -96,7 +89,7 @@ public class NexusSpiderEntity extends SpiderEntity implements NexusEntity, Moun
     protected void initGoals() {
         goalSelector.add(0, new SwimGoal(this));
         goalSelector.add(1, new MobMeleeAttackGoal(this, 1.3F, false));
-        goalSelector.add(1, new RallyBehindLeaderGoal<>(this, IMCreeperEntity.class, 4));
+//        goalSelector.add(1, new RallyBehindLeaderGoal<>(this, IMCreeperEntity.class, 4));
         goalSelector.add(2, new AttackNexusGoal<>(this));
         goalSelector.add(3, new ProvideSupportGoal(this, 5, false));
         initExtraGoals();

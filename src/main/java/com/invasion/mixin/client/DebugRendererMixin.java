@@ -1,5 +1,6 @@
 package com.invasion.mixin.client;
 
+import com.invasion.InvasionMod;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -23,7 +24,7 @@ import net.minecraft.util.math.BlockPos;
 abstract class DebugRendererMixin {
     @Inject(method = "render", at = @At("TAIL"))
     private void invasion_after_render(MatrixStack matrices, VertexConsumerProvider.Immediate vertexConsumers, double cameraX, double cameraY, double cameraZ, CallbackInfo info) {
-        if (Debug.DEBUG_PATHFINDING) {
+        if (InvasionMod.getConfig().enablePathVisuals) {
             MinecraftClient.getInstance().debugRenderer.pathfindingDebugRenderer.render(matrices, vertexConsumers, cameraX, cameraY, cameraZ);
         }
     }

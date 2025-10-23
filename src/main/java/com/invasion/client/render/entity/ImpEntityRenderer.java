@@ -13,9 +13,9 @@ public class ImpEntityRenderer extends LivingEntityRenderer<ImpEntity, ImpEntity
 
 	public ImpEntityRenderer(EntityRendererFactory.Context ctx) {
 		super(ctx, new ImpEntityModel(ImpEntityModel.getTexturedModelData().createModel()), 0.3F);
-    }
+	}
 
-	@Override
+    @Override
     public Identifier getTexture(ImpEntity entity) {
 		return TEXTURE;
 	}

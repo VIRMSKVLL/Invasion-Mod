@@ -1,5 +1,6 @@
 package com.invasion.entity;
 
+import com.invasion.entity.ai.goal.RallyBehindLeaderGoal;
 import org.jetbrains.annotations.Nullable;
 
 import com.invasion.entity.ai.goal.AttackNexusGoal;
@@ -46,8 +47,8 @@ public class IMSkeletonEntity extends IMMobEntity implements RangedAttackMob {
     @Override
     protected void initGoals() {
         goalSelector.add(0, new SwimGoal(this));
-        goalSelector.add(1, new BowAttackGoal<>(this, 1 /*160*/, 15, 16F)); //TODO: Faster variant of skeletons
-        // goalSelector.add(1, new EntityAIRallyBehindEntity(this, EntityIMCreeper.class, 4.0F));
+        goalSelector.add(1, new BowAttackGoal<>(this, 1 /*160*/, 4/*15*/, 16F)); //TODO: Faster variant of skeletons
+//         goalSelector.add(1, new RallyBehindLeaderGoal<>(this, IMCreeperEntity.class, 4.0F));
         goalSelector.add(3, new AttackNexusGoal<>(this));
         goalSelector.add(4, new GoToNexusGoal(this));
         goalSelector.add(5, new WanderAroundFarGoal(this, 1));

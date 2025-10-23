@@ -27,7 +27,7 @@
     "item.invmod.mother_spider_spawn_egg": "Mother Spider Spawn Egg",
 
     "entity.invmod.zombie": "Invading Zombie",
-    "entity.invmod.zombie_pigma": "Invading Zombie Pigman",
+    "entity.invmod.zombie_pigman": "Invading Zombie Pigman",
     "entity.invmod.skeleton": "Invading Skeleton",
     "entity.invmod.spider": "Invading Spider",
     "entity.invmod.jumping_spider": "Jumping Spider",
@@ -41,7 +41,7 @@
     "entity.invmod.boulder": "Boulder",
     "entity.invmod.spider_egg": "Invading Spider Egg",
     "entity.invmod.trap": "Trap",
-    "entity.invmod.Invadingp": "IM Imp",
+    "entity.invmod.imp": "Invading Imp",
 
     "invmod.message.probe.rangechanged": "Nexus range changed to: %s",
     "invmod.message.probe.cannotchangerange": "Nexus is currently active! Range: %s",

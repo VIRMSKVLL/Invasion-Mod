@@ -10,6 +10,8 @@ import net.minecraft.registry.Registry;
 
 public interface InvParticles {
     SimpleParticleType DAZE = register("daze", FabricParticleTypes.simple(true));
+    SimpleParticleType IMPTAIL = register("imptail", FabricParticleTypes.simple(true));
+
 
     static <T extends ParticleType<?>> T register(String name, T type) {
         return Registry.register(Registries.PARTICLE_TYPE, InvasionMod.id(name), type);

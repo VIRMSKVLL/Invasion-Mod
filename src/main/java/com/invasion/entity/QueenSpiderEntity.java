@@ -23,14 +23,14 @@ public class QueenSpiderEntity extends NexusSpiderEntity implements Reproducer {
 
     public static DefaultAttributeContainer.Builder createAttributes() {
         return SpiderEntity.createSpiderAttributes()
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.59F)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.015F)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, 5)
                 .add(EntityAttributes.GENERIC_GRAVITY, 0.18);
     }
 
     @Override
     protected float getGlobalScaleMultiplier() {
-        return super.getGlobalScaleMultiplier() + 1F;
+        return super.getGlobalScaleMultiplier() + 0.5F;
     }
 
     @Override

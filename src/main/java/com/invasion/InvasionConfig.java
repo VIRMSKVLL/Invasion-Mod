@@ -24,7 +24,8 @@ public class InvasionConfig extends Config {
     private static final Map<String, Integer> DEFAULT_MOB_HEALTHS = Util.make(new HashMap<>(), m -> {
         m.put("IMCreeper-T1", 20);
         m.put("IMVulture-T1", 20);
-        m.put("IMImp-T1", 20);
+        m.put("IMImp-T1", 4);
+        m.put("IMPhantom", 4);
         m.put("IMPigManEngineer-T1", 20);
         m.put("IMSkeleton-T1", 20);
         m.put("IMSpider-T1-Spider", 18);
@@ -54,6 +55,7 @@ public class InvasionConfig extends Config {
     private final Map<Identifier, Float> strengthOverrides = new HashMap<>();
 
     public boolean enableLog;
+    public boolean enablePathVisuals;
     public boolean debugMode;
     public boolean destructedBlocksDrop = true;
     public boolean updateNotifications;
@@ -83,13 +85,10 @@ public class InvasionConfig extends Config {
         return getBlockStrength(block).map(strength -> 1 + strength * 0.4F);
     }
 
-    public int getHealth(String mobName, boolean nightTime) {
-        return (nightTime ? mobHealthNightspawn : mobHealthInvasion).getOrDefault(mobName, DEFAULT_MOB_HEALTHS.getOrDefault(mobName, 20));
-    }
-
     public int getHealth(Combatant<?> mob) {
-        // TODO:
-        return getHealth(mob.getLegacyName(), !mob.hasNexus());
+        String mobName = mob.getLegacyName();//.asEntity().getClass().getSimpleName();
+        InvasionMod.LOGGER.trace(mobName);
+        return (!mob.hasNexus() ? mobHealthNightspawn : mobHealthInvasion).getOrDefault(mobName, DEFAULT_MOB_HEALTHS.getOrDefault(mobName, 20));
     }
 
     public synchronized Select<EntityPattern> getSpawnPool() {

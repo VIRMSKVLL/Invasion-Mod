@@ -3,6 +3,7 @@ package com.invasion.nexus.wave;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.invasion.InvasionMod;
 import com.invasion.nexus.spawns.Spawner;
 
 public class Wave {

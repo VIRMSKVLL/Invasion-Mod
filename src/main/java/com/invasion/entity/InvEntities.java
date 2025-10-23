@@ -12,6 +12,7 @@ import net.minecraft.entity.EntityAttachmentType;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.mob.PhantomEntity;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.math.Vec3d;
@@ -41,6 +42,10 @@ public interface InvEntities {
             .dimensions(0.6F, 1.99F).eyeHeight(1.74F).vehicleAttachment(-0.7F).maxTrackingRange(8));
     EntityType<ImpEntity> IMP = register("imp", EntityType.Builder.<ImpEntity>create(ImpEntity::new, SpawnGroup.MONSTER)
             .dimensions(0.8F, 0.9F).eyeHeight(0.9F).vehicleAttachment(-0.7F).maxTrackingRange(8));
+    EntityType<InvPhantomEntity> PHANTOM = register("phantom",EntityType.Builder.<InvPhantomEntity>create(InvPhantomEntity::new, SpawnGroup.MONSTER)
+            .dimensions(1.5F,0.5F).eyeHeight(0.4F));
+
+
     EntityType<IMWolfEntity> WOLF = register("wolf", EntityType.Builder.<IMWolfEntity>create(IMWolfEntity::new, SpawnGroup.CREATURE)
             .dimensions(0.6F, 0.85F).eyeHeight(0.85F).passengerAttachments(new Vec3d(0.0, 0.81875, -0.0625)).maxTrackingRange(10));
 
@@ -51,17 +56,16 @@ public interface InvEntities {
             .dimensions(0.5F, 0.28F).makeFireImmune().maxTrackingRange(10).disableSummon());
 
     @Deprecated
+    EntityType<ElectricityBoltEntity> BOLT = register("bolt", EntityType.Builder.<ElectricityBoltEntity>create(ElectricityBoltEntity::new, SpawnGroup.MISC)
+            .dimensions(0.5F, 0.5F).maxTrackingRange(8).disableSummon().disableSaving());
     EntityType<SfxEntity> SFX = register("sfx", EntityType.Builder.<SfxEntity>create(SfxEntity::new, SpawnGroup.MISC)
             .dimensions(0.5F, 0.5F).maxTrackingRange(8).disableSummon().disableSaving());
     EntityType<SpawnProxyEntity> SPAWN_PROXY = register("spawn_proxy", EntityType.Builder.<SpawnProxyEntity>create(SpawnProxyEntity::new, SpawnGroup.MONSTER)
-            .dimensions(0.5F, 0.5F).maxTrackingRange(8).disableSummon().disableSaving());
-    EntityType<ElectricityBoltEntity> BOLT = register("bolt", EntityType.Builder.<ElectricityBoltEntity>create(ElectricityBoltEntity::new, SpawnGroup.MISC)
             .dimensions(0.5F, 0.5F).maxTrackingRange(8).disableSummon().disableSaving());
     EntityType<BoulderEntity> BOULDER = register("boulder", EntityType.Builder.<BoulderEntity>create(BoulderEntity::new, SpawnGroup.MISC)
             .dimensions(0.5F, 0.5F).maxTrackingRange(8));
     EntityType<EntityIMPrimedTNT> TNT = register("tnt", EntityType.Builder.<EntityIMPrimedTNT>create(EntityIMPrimedTNT::new, SpawnGroup.MISC)
             .makeFireImmune().dimensions(0.98F, 0.98F).eyeHeight(0.15F).maxTrackingRange(10).trackingTickInterval(10));
-
     EntityType<VultureEntity> BIRD = register("bird", betaFeature(EntityType.Builder.<VultureEntity>create(VultureEntity::new, SpawnGroup.MONSTER)
             .dimensions(1, 1).maxTrackingRange(10).trackingTickInterval(10)));
     EntityType<EntityIMGiantBird> VULTURE = register("vulture", betaFeature(EntityType.Builder.<EntityIMGiantBird>create(EntityIMGiantBird::new, SpawnGroup.MONSTER)
@@ -90,9 +94,10 @@ public interface InvEntities {
         FabricDefaultAttributeRegistry.register(IMP, ImpEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(WOLF, IMWolfEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(SPIDER_EGG, SpiderEggEntity.createAttributes());
+        FabricDefaultAttributeRegistry.register(PHANTOM, InvPhantomEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(SPAWN_PROXY, MobEntity.createMobAttributes());
-        FabricDefaultAttributeRegistry.register(BIRD, VultureEntity.createBirdAttributes());
-        FabricDefaultAttributeRegistry.register(VULTURE, EntityIMGiantBird.createVultureAttributes());
+//        FabricDefaultAttributeRegistry.register(BIRD, VultureEntity.createBirdAttributes());
+//        FabricDefaultAttributeRegistry.register(VULTURE, EntityIMGiantBird.createVultureAttributes());
 
         InvasionConfig config = InvasionMod.getConfig();
 

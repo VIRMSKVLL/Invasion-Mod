@@ -8,6 +8,7 @@ import com.invasion.nexus.ControllableNexusAccess;
 import com.invasion.nexus.WorldNexusStorage;
 import com.invasion.nexus.test.Tester;
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.BoolArgumentType;
 import com.mojang.brigadier.arguments.FloatArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
@@ -45,6 +46,12 @@ public class InvasionCommand {
         }
         return builder.then(CommandManager.literal("test").requires(source -> InvasionMod.getConfig().debugMode)
                 .then(CommandManager.literal("status").executes(context -> printDebugStatus(context.getSource())))
+                .then(CommandManager.literal("pathDebug")
+                .then(CommandManager.argument("pathDebugState", BoolArgumentType.bool())
+                                .executes(context -> {
+                                    InvasionMod.getConfig().enablePathVisuals = BoolArgumentType.getBool(context, "pathDebugState");
+                                    return 1;
+                                })))
                 .then(CommandManager.literal("spawner").executes(context -> testSpawner(context.getSource(), IntRange.between(1, 11)))
                         .then(CommandManager.argument("waves", NumberRangeArgumentType.intRange()).executes(context -> testSpawner(context.getSource(), NumberRangeArgumentType.IntRangeArgumentType.getRangeArgument(context, "waves")))))
                 .then(CommandManager.literal("spawnPoints").executes(context -> testSpawnpoints(context.getSource())))

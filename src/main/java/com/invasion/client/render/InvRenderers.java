@@ -1,5 +1,6 @@
 package com.invasion.client.render;
 
+import com.invasion.client.particle.ImpTailParticle;
 import com.invasion.client.render.entity.VultureEntityRenderer;
 import com.invasion.client.render.entity.ElectricityBoltEntityRenderer;
 import com.invasion.client.render.entity.BoulderEntityRenderer;
@@ -25,12 +26,14 @@ import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.item.ModelPredicateProviderRegistry;
 import net.minecraft.client.render.entity.EmptyEntityRenderer;
+import net.minecraft.client.render.entity.PhantomEntityRenderer;
 import net.minecraft.client.render.entity.SpiderEntityRenderer;
 import net.minecraft.util.Identifier;
 
 public interface InvRenderers {
     static void bootstrap() {
         ParticleFactoryRegistry.getInstance().register(InvParticles.DAZE, DazeParticle::factory);
+        ParticleFactoryRegistry.getInstance().register(InvParticles.IMPTAIL, ImpTailParticle::factory);
 
         EntityRendererRegistry.register(InvEntities.ZOMBIE, AbstractIMZombieEntityRenderer::new);
         EntityRendererRegistry.register(InvEntities.ZOMBIE_PIGMAN, ZombiePigmanEntityRenderer::new);
@@ -53,6 +56,7 @@ public interface InvRenderers {
         EntityRendererRegistry.register(InvEntities.CREEPER, IMCreeperEntityRenderer::new);
         EntityRendererRegistry.register(InvEntities.BIRD, VultureEntityRenderer::new);
         EntityRendererRegistry.register(InvEntities.VULTURE, RenderGiantBird::new);
+        EntityRendererRegistry.register(InvEntities.PHANTOM, PhantomEntityRenderer::new);
 
         ModelPredicateProviderRegistry.register(InvItems.SEARING_BOW, Identifier.ofVanilla("pull"), (stack, world, entity, seed) -> {
             return entity == null || entity.getActiveItem() != stack ? 0.0F : (stack.getMaxUseTime(entity) - entity.getItemUseTimeLeft()) / 20F;

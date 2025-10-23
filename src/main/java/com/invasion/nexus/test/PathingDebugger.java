@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.invasion.InvasionMod;
 import org.apache.commons.lang3.stream.IntStreams;
 import org.jetbrains.annotations.Nullable;
 
@@ -21,7 +22,7 @@ import net.minecraft.util.math.BlockPos;
 public class PathingDebugger {
 
     public static void sendPathToClients(Entity sender, @Nullable Path path, float scale) {
-        if (Debug.DEBUG_PATHFINDING) {
+        if (InvasionMod.getConfig().enablePathVisuals) {
             sender.getServer().getPlayerManager().sendToAll(new CustomPayloadS2CPacket(new DebugPathCustomPayload(sender.getId(), createDebuggablePath(path), scale)));
         }
     }

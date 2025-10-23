@@ -84,6 +84,8 @@ public interface InvItems {
     Item TIER_TWO_ZOMBIE_PIGMAN_SPAWN_EGG = register("tier_two_pigman_zombie_spawn_egg", createSpawnEgg(InvEntities.ZOMBIE_PIGMAN, 0xEB8E91, 0x49652F, NexusEntity.createVariant(1, 2)));
     Item ZOMBIE_PIGMAN_BRUTE_SPAWN_EGG = register("zombie_pigman_brute_spawn_egg", createSpawnEgg(InvEntities.ZOMBIE_PIGMAN, 0xEB8E91, 0x49652F, NexusEntity.createVariant(1, 3)));
 
+    Item PHANTOM_SPAWN_EGG = register("phantom_spawn_egg", createSpawnEgg(InvEntities.PHANTOM,0x444167, 0x0A0328));
+
     RegistryKey<Item> BIRD_SPAWN_EGG = RegistryKey.of(RegistryKeys.ITEM, InvasionMod.id("bird_spawn_egg"));
     RegistryKey<Item> VULTURE_SPAWN_EGG = RegistryKey.of(RegistryKeys.ITEM, InvasionMod.id("vulture_spawn_egg"));
 

@@ -98,7 +98,7 @@ public class IMLandPathNodeMaker extends LandPathNodeMaker implements DynamicPat
         previousNodePosition = node.getBlockPos();
         previousNodeAction = ActionablePathNode.getAction(node);
         int index = getSuccessors(super.getSuccessors(successors, node), successors, node, context.getWorld(), this);
-        if (Debug.DEBUG_PATHFINDING) {
+        if (InvasionMod.getConfig().enablePathVisuals) {
             for (int i = 0; i < index; i++) {
                 /*if (ActionablePathNode.getAction(successors[i]) != PathAction.NONE) {
                     successors[i].type = PathNodeType.WALKABLE;

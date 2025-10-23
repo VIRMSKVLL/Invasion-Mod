@@ -20,8 +20,8 @@ import net.minecraft.util.math.Vec3d;
 
 public class GoToNexusGoal extends Goal {
     private PathAwareEntity mob;
-    private final NexusEntity nexusEntity;
     private Optional<BlockPos> lastPathRequestPos = Optional.empty();
+    private final NexusEntity nexusEntity;
     private final Navigation navigation;
     private int pathRequestTimer;
     private int pathFailedCount;
