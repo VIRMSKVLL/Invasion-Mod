@@ -92,6 +92,7 @@ public abstract class EntityIMLiving extends HostileEntity implements NexusEntit
 
     @Override
     public boolean canSee(Entity entity) {
+        if (isStunned()) { return false; }
         float distance = distanceTo(entity);
         return distance <= getSenseRange() || (super.canSee(entity) && distance <= getAggroRange());
     }

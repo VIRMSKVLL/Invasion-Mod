@@ -5,7 +5,11 @@ import com.invasion.block.BlockSpecial;
 import com.invasion.block.InvBlocks;
 import com.invasion.block.NexusBlockEntity;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.AreaEffectCloudEntity;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
@@ -18,6 +22,8 @@ import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.minecraft.world.World.ExplosionSourceType;
 import net.minecraft.world.event.GameEvent;
+
+import java.util.Collection;
 
 public class BoulderEntity extends PersistentProjectileEntity {
 
@@ -52,7 +58,7 @@ public class BoulderEntity extends PersistentProjectileEntity {
             exploded = true;
             if (state.isOf(InvBlocks.NEXUS_CORE) && getWorld().getBlockEntity(hit.getBlockPos()) instanceof NexusBlockEntity nexus) {
                 // TODO: Boulder damage source type
-                nexus.getNexus().damage(getDamageSources().arrow(this, getOwner()), 2);
+                nexus.getNexus().damage(getDamageSources().mobProjectile(this, (LivingEntity) getOwner()), 2);
             } else if (state.getHardness(getWorld(), hit.getBlockPos()) >= 0) {
 
                 if (!state.isIn(BlockTags.WITHER_IMMUNE) && !state.isIn(BlockTags.DRAGON_IMMUNE)) {
@@ -61,11 +67,17 @@ public class BoulderEntity extends PersistentProjectileEntity {
                         discard();
                         return;
                     }
-                    if (getWorld().getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) {
-                        getWorld().createExplosion(this, getX(), getY(), getZ(), 2, ExplosionSourceType.BLOCK);
-                    }
+                    if (getWorld().getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING)) { this.explode(); }
                 }
             }
+        }
+    }
+
+
+    private void explode() {
+        if (!this.getWorld().isClient) {
+            this.getWorld().createExplosion(this, this.getX(), this.getY(), this.getZ(), 2, ExplosionSourceType.MOB);
+            this.discard();
         }
     }
 

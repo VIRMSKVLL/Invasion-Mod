@@ -31,6 +31,7 @@ public class SearingBowItem extends BowItem {
         }
     }
 
+
     @Override
     protected int getWeaponStackDamage(ItemStack projectile) {
         return 0;

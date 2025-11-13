@@ -132,7 +132,7 @@ public class InvasionConfig extends Config {
         enableLog = getPropertyValueBoolean("enable-log-file", false);
         destructedBlocksDrop = getPropertyValueBoolean("destructed-blocks-drop", true);
         updateNotifications = getPropertyValueBoolean("update-messages-enabled", false);
-        debugMode = getPropertyValueBoolean("debug", false);
+        debugMode = getPropertyValueBoolean("debug", true);
 
         minContinuousModeDays = getPropertyValueInt("min-days-to-attack", 2);
         maxContinuousModeDays = getPropertyValueInt("max-days-to-attack", 3);

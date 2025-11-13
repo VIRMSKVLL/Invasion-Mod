@@ -124,8 +124,8 @@ public class WaveBuilder {
 
     @Nullable
     public static Wave generateMainInvasionWave(int waveNumber) {
-        return generateExtendedWave(waveNumber).build();
-//            return generateDebugWave(waveNumber).build();
+//        return generateExtendedWave(waveNumber).build();
+            return generateDebugWave(waveNumber).build();
 //        if (waveNumber < Waves.WAVES.size()) {
 //            return Waves.WAVES.get(waveNumber).build();
 //        }
@@ -136,10 +136,10 @@ public class WaveBuilder {
         float timeScale = 1 + (waveNumber - 11) * 0.04F;
         return Wave.builder((int) (timeScale * 120000), (int) (timeScale * 35000))
                 .entry(WaveEntry.random()
-                        .entry(EntityPatterns.PHANTOM,10F)
-                        .entry(EntityPatterns.IMP_T1, 0.4F).end((int) (timeScale * 30000)).amount((int) (mobScale * 7)).granularity(2000).angle(45).minSpawns(5))
+                        .entry(EntityPatterns.PIGMAN_ENGINEER_T1_ANY,10F)
+                        .entry(EntityPatterns.ZOMBIE_T1_ANY, 0.4F).end((int) (timeScale * 30000)).amount((int) (mobScale * 7)).granularity(2000).angle(45).minSpawns(5))
                 .entry(WaveEntry.random()
-                        .entry(EntityPatterns.PHANTOM,10F)
+                        .entry(EntityPatterns.PIGMAN_ENGINEER_T1_ANY,10F)
                         .entry(EntityPatterns.IMP_T1, 0.4F).begin((int) (timeScale * 65000)).end((int) (timeScale * 67000)).amount((int) (mobScale * 7)).granularity(500).angle(25).minSpawns(3))
                 ;
     }

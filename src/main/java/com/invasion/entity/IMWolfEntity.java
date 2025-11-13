@@ -2,6 +2,12 @@ package com.invasion.entity;
 
 import java.util.Comparator;
 import java.util.Optional;
+
+import com.invasion.particle.InvParticles;
+import net.minecraft.entity.*;
+import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.GlobalPos;
 import org.jetbrains.annotations.Nullable;
 
 import com.invasion.InvasionMod;
@@ -10,10 +16,6 @@ import com.invasion.nexus.IHasNexus;
 import com.invasion.nexus.NexusAccess;
 import com.invasion.nexus.Mode;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityStatuses;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
@@ -32,7 +34,7 @@ import net.minecraft.world.World;
 
 public class IMWolfEntity extends WolfEntity implements IHasNexus {
     private final IHasNexus.Handle nexus = new IHasNexus.Handle(this::getWorld);
-
+    // TODO: make nexus wolf activatable during nexus event with bone but when nexus ends so does the entity swap and all IMWOlfEntities should transform back to wolves
     public IMWolfEntity(EntityType<IMWolfEntity> type, World world) {
         this(type, world, null);
     }
@@ -42,14 +44,37 @@ public class IMWolfEntity extends WolfEntity implements IHasNexus {
         setNexus(nexus);
     }
 
+    @Override
+    public void tick() {
+        super.tick();
+        if (!hasNexus() || getNexus().getMode() == Mode.STOPPED) {
+            IMWolfEntity wolf = this;
+            WolfEntity newWolf = this.convertTo(EntityType.WOLF, true);
+            newWolf.copyFrom(wolf);
+        }
+    }
+
+    @Override
+    public void tickMovement() {
+//        for (int i = 0; i < 2; ++i) {
+//            ServerWorld world = getServer().getWorld(this.getWorld().getRegistryKey());
+//            world.spawnParticles(ParticleTypes.ENCHANT,this.getX(),this.getY()+0.25,this.getZ(),1,0,0,0,0);
+//        }
+        super.tickMovement();
+    }
+
+    @Override
+    public void tryTeleportToOwner() {
+    }
+
     public static DefaultAttributeContainer.Builder createAttributes() {
-        return WolfEntity.createWolfAttributes();
+        return WolfEntity.createWolfAttributes().add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK,2.4F).add(EntityAttributes.GENERIC_ATTACK_DAMAGE,6F).add(EntityAttributes.GENERIC_MOVEMENT_SPEED,0.5F);
     }
 
     @Override
     protected void initGoals() {
         super.initGoals();
-        targetSelector.add(5, new ActiveTargetGoal<>(this, HostileEntity.class, true));
+        targetSelector.add(8, new ActiveTargetGoal<>(this, HostileEntity.class, true));
     }
 
     @Override
@@ -67,23 +92,21 @@ public class IMWolfEntity extends WolfEntity implements IHasNexus {
     @Override
     public boolean tryAttack(Entity target) {
         boolean success = super.tryAttack(target);
-        if (success) {
+            if (success) {
             heal(4);
+            getWorld().sendEntityStatus(this, EntityStatuses.ADD_BREEDING_PARTICLES);
+        }
+        if (Math.random() < 0.50 && target instanceof Stunnable) {
+            ((Stunnable) target).stun(20*4);
         }
         return success;
     }
 
-    @Override
-    protected void updateAttributesForTamed() {
-        getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(0.3);
-        super.updateAttributesForTamed();
-    }
 
     @Override
     protected void updatePostDeath() {
         if (++deathTime >= 120) {
             getWorld().sendEntityStatus(this, EntityStatuses.ADD_DEATH_PARTICLES);
-            remove(Entity.RemovalReason.KILLED);
             for (int j = 0; j < 20; j++) {
                 getWorld().addParticle(ParticleTypes.EXPLOSION,
                         getParticleX(2),
@@ -94,23 +117,20 @@ public class IMWolfEntity extends WolfEntity implements IHasNexus {
                         getRandom().nextGaussian() * 0.02D
                 );
             }
-        }
-    }
-
-    @Override
-    public void onDeath(DamageSource source) {
-        if (!respawnAtNexus()) {
-            super.onDeath(source);
+            if (!respawnAtNexus()) {
+                remove(Entity.RemovalReason.KILLED);
+            }
         }
     }
 
     public boolean respawnAtNexus() {
-        if (getWorld().isClient || !hasNexus() || getNexus().getMode() == Mode.STOPPED) {
+        if (!hasNexus() || getNexus().getMode() == Mode.STOPPED) {
             return false;
         }
+        deathTime = 0;
 
         return nexus.getPos().filter(center -> {
-            IMWolfEntity wolf = InvEntities.WOLF.create(getWorld());
+            IMWolfEntity wolf = InvEntities.WOLF.create(this.getWorld());
             Optional<Vec3d> respawnPoint = BlockPos.streamOutwards(center.pos(), 5, 3, 5).map(BlockPos::toBottomCenterPos)
                     .filter(pos -> {
                         wolf.setPosition(pos);
@@ -120,36 +140,16 @@ public class IMWolfEntity extends WolfEntity implements IHasNexus {
 
             if (respawnPoint.isPresent()) {
                 wolf.copyFrom(this);
+                wolf.setHealth(40.0F);
                 wolf.setNexus(getNexus());
-                wolf.setPosition(respawnPoint.get());
-                wolf.setRotation(0, 0);
-                wolf.heal(60.0F);
-                if (!isRemoved()) {
-                    discard();
-                }
+                wolf.setPosition(respawnPoint.get().add(new Vec3d(0.0F,1.0F,0.0F)));
+                if (!isRemoved()) { discard(); }
                 getWorld().spawnEntity(wolf);
                 return true;
             }
             InvasionMod.LOGGER.warn("No respawn spot for wolf");
             return false;
         }).isPresent();
-    }
-
-    @Override
-    public ActionResult interactMob(PlayerEntity player, Hand hand) {
-        ItemStack stack = player.getStackInHand(hand);
-        if (stack.isOf(InvItems.STRANGE_BONE) && isOwner(player)) {
-            if (!getWorld().isClient) {
-                NexusAccess newNexus = IHasNexus.findNexus(getWorld(), getBlockPos());
-                if (newNexus != null && newNexus != getNexus()) {
-                    setNexus(newNexus);
-                    stack.decrementUnlessCreative(1, player);
-                    setHealth(25);
-                }
-            }
-            return ActionResult.SUCCESS;
-        }
-        return super.interactMob(player, hand);
     }
 
     @Override
