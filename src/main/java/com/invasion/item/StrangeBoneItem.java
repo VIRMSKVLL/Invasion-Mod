@@ -1,6 +1,7 @@
 package com.invasion.item;
 
 import com.invasion.nexus.Mode;
+import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import com.invasion.entity.IMWolfEntity;
@@ -17,6 +18,8 @@ import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
+
+import java.util.UUID;
 
 class StrangeBoneItem extends Item {
     public StrangeBoneItem(Settings settings) {
@@ -41,11 +44,14 @@ class StrangeBoneItem extends Item {
         }
 
         IMWolfEntity newWolf = wolf.convertTo(InvEntities.WOLF,true);
-        newWolf.copyFrom(wolf);
-        newWolf.setNexus(nexus);
+//        newWolf.copyFrom(wolf);
+//        newWolf.setUuid(UUID.randomUUID());
+//        newWolf.setNexus(nexus);
 
-        wolf.getWorld().spawnEntity(newWolf);
-        wolf.discard();
+//        World wolfWorld = wolf.getWorld();
+//        wolf.discard();
+//        wolfWorld.spawnEntity(newWolf);
+
         stack.decrement(1);
         return ActionResult.SUCCESS;
     }

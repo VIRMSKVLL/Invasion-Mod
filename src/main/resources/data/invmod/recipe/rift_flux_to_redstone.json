@@ -8,7 +8,7 @@
     "X X"
   ],
   "result":   {
-      "item": "minecraft:iron_redstone",
+      "id": "minecraft:redstone",
       "count": 24
     }
 }

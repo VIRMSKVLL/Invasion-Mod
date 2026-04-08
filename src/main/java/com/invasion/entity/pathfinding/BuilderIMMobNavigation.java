@@ -126,7 +126,7 @@ public class BuilderIMMobNavigation extends IMMobNavigation {
         }
 
         protected final long getWallHeightPermittingGaps(Direction orientation, BlockPos pos) {
-            return climbableObstacleHeights.computeIfAbsent(orientation, o -> new Long2ObjectOpenHashMap<Long>())
+            return climbableObstacleHeights.computeIfAbsent(orientation, o -> new Long2ObjectOpenHashMap<Long>()) // FIXME: MAX_LADDER_TOWER_HEIGHT SHOULD BE THE ACTUAL HEIGHT OF THE ATTEMPTED TOWER NOT THE MAX ALLOWABLE TOWER HEIGHT. THIS IS INCORRECT
                     .computeIfAbsent(pos.asLong(), l -> (long)ClimberUtil.getWallHeightPermittingGaps(world, pos.mutableCopy(), orientation, MAX_LADDER_TOWER_HEIGHT, MAX_LADDER_TOWER_HEIGHT));
         }
 
@@ -227,7 +227,7 @@ public class BuilderIMMobNavigation extends IMMobNavigation {
                 // Measure wall heights and pick the side that gets us the farthest
                 for (Direction alternate : possibleOrientations) {
                     if (alternate != ladderOrientation) {
-                        long alternateHeight = getWallHeightPermittingGaps(alternate, mutable.set(x, feetY, z));
+                        long alternateHeight = getWallHeightPermittingGaps(alternate, mutable.set(x, feetY, z)); // FIXME: RELATED LATTER CALC BUG FIX PLS
                         if (alternateHeight > 0 && alternateHeight < MAX_LADDER_TOWER_HEIGHT && alternateHeight > ladderHeight) {
                             optimalOrientation = alternate;
                             ladderHeight = alternateHeight;

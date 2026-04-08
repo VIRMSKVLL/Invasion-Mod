@@ -76,7 +76,7 @@ public class PigmanEngineerEntity extends IMMobEntity implements Miner {
         goalSelector.add(9, new LookAtEntityGoal(this, IMCreeperEntity.class, 12));
         goalSelector.add(9, new LookAroundGoal(this));
 
-        targetSelector.add(1, new CustomRangeActiveTargetGoal<>(this, VillagerEntity.class, 3, true));
+        targetSelector.add(1, new CustomRangeActiveTargetGoal<>(this, VillagerEntity.class, 3, true)); // TODO: what?
         targetSelector.add(1, new PredicatedGoal(new CustomRangeActiveTargetGoal<>(this, PlayerEntity.class, 3, true), this::hasNexus));
         targetSelector.add(1, new PredicatedGoal(new CustomRangeActiveTargetGoal<>(this, PlayerEntity.class, this::getSenseRange, false), () -> !hasNexus()));
         targetSelector.add(2, new PredicatedGoal(new CustomRangeActiveTargetGoal<>(this, PlayerEntity.class, this::getAggroRange, true), () -> !hasNexus()));

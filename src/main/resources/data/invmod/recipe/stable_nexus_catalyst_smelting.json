@@ -6,5 +6,7 @@
   "ingredient": {
     "item": "invmod:stable_catalyst_mixture"
   },
-  "result": "invmod:stable_nexus_catalyst"
+  "result": {
+    "id": "invmod:stable_nexus_catalyst"
+  }
 }

@@ -1,7 +1,7 @@
 package com.invasion.nexus.wave;
 
 public class WaveSpawnerException extends Exception {
-    private static final long serialVersionUID = 1145923705060364529L;
+    private static final long serialVersionUID = 1145923705060364529L; // REMOVEME: UNUSED????
 
     public WaveSpawnerException(String message) {
         super(message);

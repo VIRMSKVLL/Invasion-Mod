@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.invasion.nexus.wave.pool.Select;
-
+// TODO: DATAPACK???
 public interface Waves {
     List<Wave.Builder> WAVES = new ArrayList<>();
     Select.PoolBuilder<EntityPattern, Float> WAVE_TWO_BASE_POOL = Select.<EntityPattern>random()

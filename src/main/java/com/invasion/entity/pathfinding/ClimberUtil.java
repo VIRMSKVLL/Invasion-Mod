@@ -3,6 +3,7 @@ package com.invasion.entity.pathfinding;
 import java.util.List;
 import java.util.stream.Stream;
 
+import com.invasion.InvasionMod;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.LadderBlock;
@@ -64,7 +65,9 @@ public interface ClimberUtil {
         });
     }
 
-    static int getWallHeightPermittingGaps(World world, BlockPos.Mutable mutable, Direction facing, int maxWall, int maxGap) {
+    static int getWallHeightPermittingGaps(World world, BlockPos.Mutable mutable, Direction facing, int maxWall, int maxGap) { // TODO: POSSIBLE LADDER HEIGHT CALC BUG?
+        InvasionMod.log(String.valueOf(maxWall));
+
         BlockPos initial = mutable.toImmutable();
         int maxY = world.getTopY(Type.WORLD_SURFACE, mutable.getX(), mutable.getZ());
 

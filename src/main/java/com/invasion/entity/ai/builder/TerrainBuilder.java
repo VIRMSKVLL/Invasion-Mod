@@ -2,6 +2,7 @@ package com.invasion.entity.ai.builder;
 
 import java.util.stream.Stream;
 
+import com.invasion.InvasionMod;
 import org.jetbrains.annotations.Nullable;
 
 import com.invasion.entity.NexusEntity;
@@ -88,12 +89,12 @@ public class TerrainBuilder implements ITerrainBuild {
         BlockPos.Mutable mutable = pos.mutableCopy();
         World world = mob.asEntity().getWorld();
 
-//        if (!world.getBlockState(mutable.set(pos).move(orientation).move(Direction.DOWN)).isFullCube(world, mutable)) {
-//            builder.add(new ModifyBlockEntry(mutable.toImmutable(), Blocks.CRIMSON_PLANKS.getDefaultState(), (int) (PLANKS_COST / buildRate)));
-//        }
-//        if (world.isAir(mutable.move(Direction.DOWN))) {
-//            builder.add(new Modify    BlockEntry(mutable.toImmutable(), Blocks.LADDER.getDefaultState(), (int) (LADDER_COST / buildRate)));
-//        }
+        if (!world.getBlockState(mutable.set(pos).move(orientation).move(Direction.DOWN)).isFullCube(world, mutable)) {
+            builder.add(new ModifyBlockEntry(mutable.toImmutable(), Blocks.CRIMSON_PLANKS.getDefaultState(), (int) (PLANKS_COST / buildRate)));
+        }
+        if (world.isAir(mutable.move(Direction.DOWN))) {
+            builder.add(new ModifyBlockEntry(mutable.toImmutable(), Blocks.LADDER.getDefaultState(), (int) (LADDER_COST / buildRate)));
+        }
 
         for (int i = 0; i < layersToBuild; i++) {
             if (!world.getBlockState(mutable.set(pos).move(orientation).move(Direction.UP, i)).isFullCube(world, mutable)) {
@@ -114,7 +115,6 @@ public class TerrainBuilder implements ITerrainBuild {
         World world = mob.asEntity().getWorld();
         BlockState ladderState = Blocks.LADDER.getDefaultState().with(LadderBlock.FACING, orientation);
         BlockPos.Mutable mutable = pos.mutableCopy();
-
         if (!world.getBlockState(pos).isOf(Blocks.LADDER)) {
             if (!ClimberUtil.canPositionSupportLadder(world, mutable, orientation)) {
                 return Stream.empty();

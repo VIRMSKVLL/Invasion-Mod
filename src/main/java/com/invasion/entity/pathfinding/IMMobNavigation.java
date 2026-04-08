@@ -225,7 +225,7 @@ public class IMMobNavigation extends MobNavigation implements Navigation {
                 entity.setJumping(false);
             }
         } else if (action.getType() != PathAction.Type.DIG) {
-//            InvasionMod.LOGGER.info("Handling path action {}", action);
+            InvasionMod.LOGGER.info("Handling path action {}", action);
             if (entity instanceof NexusEntity e && e.handlePathAction(getCurrentPath().getCurrentNodePos(), action, this)) {
                 waitingForNotify = MAX_WAIT_TIME;
             }

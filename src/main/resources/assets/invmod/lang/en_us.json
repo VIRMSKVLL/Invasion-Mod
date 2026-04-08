@@ -68,7 +68,7 @@
     "invmod.message.wave.groupsmall": "A small group of mobs has gathered...",
     "invmod.message.wave.grouplarge": "A large number of mobs is slipping through the Nexus rift!",
 
-    "invmod.message.bone.nonearbynexus1": "",
+    "invmod.message.bone.nonearbynexus1": "No active Nexus found. Are you close enough?",
     "invmod.message.bone.nonearbynexus2": "The wolf doesn't like this Strange Bone.\nMaybe a certain block is missing...",
 
     "invmod.subtitle.nexus_chimes": "Nexus Chimes",

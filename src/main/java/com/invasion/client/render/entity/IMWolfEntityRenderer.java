@@ -12,8 +12,6 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.WolfEntityRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRenderer;
 import net.minecraft.client.render.entity.feature.FeatureRendererContext;
-import net.minecraft.client.render.entity.feature.WolfArmorFeatureRenderer;
-import net.minecraft.client.render.entity.feature.WolfCollarFeatureRenderer;
 import net.minecraft.client.render.entity.model.WolfEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.passive.WolfEntity;

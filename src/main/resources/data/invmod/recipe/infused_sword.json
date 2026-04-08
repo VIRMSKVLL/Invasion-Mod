@@ -5,7 +5,7 @@
     { "item": "invmod:rift_flux" },
     { "item": "invmod:rift_flux" },
     { "item": "invmod:rift_flux" },
-    { "item": "invmod:diamond_sword" }
+    { "item": "minecraft:diamond_sword" }
   ],
   "result": {
     "id": "invmod:rift_flux"
