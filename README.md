@@ -1,3 +1,19 @@
+# Improvements in this fork:
+- Improved Nexus UI (WIP)
+- Improved Nexus textures
+- re-added IMWolves with proper mechanics (recently broke and needs to be fixed lol)
+- Retextured and improved Imp model
+- Translation tweaks
+- Pathfinding Crash fixes (I think I need to still fix Vine climbing crashing for an invalid direction property)
+- Added phantom entity that can drop in re-reinforcements over-top the nexus skipping your base's wall defenses if you're not careful 
+
+
+
+
+# OLD README:
+
+
+
 # So you think your base is tough, do you?
 Welcome! Have you in the past built fortifications, prepared your base, crafted armor and secured your chests, then noticed that no threat ever shows up? This mod seeks to fix that. If you feel the regular mobs just aren't quite up to the challenge and you want to really test your defenses, then try this out. It also enables some useful recipes and items.
 
